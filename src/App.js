@@ -18,6 +18,7 @@ function App() {
     const response = await fetch(`https://api.edamam.com/search?q=rice&app_id=${APP_ID}&app_key=${APP_KEY}`);
     const data = await response.json();
     setRecipes(data.hits);
+    console.log(data.hits)
   }
 
 
@@ -29,8 +30,8 @@ function App() {
     <button className="search-button" type="submit">Search</button>
     </form>
     {recipe.map(recipe =>(
-      <recipe />
-    ))};
+      <Recipe tittle={recipe.recipe.label} calories={recipe.recipe.calories} image={recipe.recipe.image}/>
+    ))}
     </div>
   );
 }
