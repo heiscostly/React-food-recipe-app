@@ -9,7 +9,7 @@ function App() {
   // const exampleReq=
   const [recipe, setRecipes] = useState([]);
   const [search, setSearch] =  useState('');
-  const [query, setQuery] = useState("rice")
+  const [query, setQuery] = useState("");
 
 
 
