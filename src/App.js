@@ -3,8 +3,8 @@ import './App.css';
 import Recipe from "./recipe.js";
 
 function App() {
-  const APP_ID ="e1618d03"
-  const APP_KEY="8c7afa5c6245d4fe401c713903824dca"
+  const APP_ID = "6e52ef54";
+  const APP_KEY= "7c208dbf6d433ee1a649d0acb336fd56";
 
   // const exampleReq=
   const [recipe, setRecipes] = useState([]);
@@ -16,16 +16,16 @@ function App() {
 
 
   useEffect( () => {
-    getRecipe();
+    getRecipe()
   }, [query]);
 
   const getRecipe = async () => {
-
-    const response = await fetch(`https://api.edamam.com/search?q={query}&app_id=${APP_ID}&app_key=${APP_KEY}`);
-    const data = await response.json();
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const response = await fetch( proxyurl + `https://api.edamam.com/search?q={query}&app_id=${APP_ID}&app_key=${APP_KEY}`);
+    const data = await response.json()
     setRecipes(data.hits);
     console.log(data.hits)
-  };
+  }
 
 
 
