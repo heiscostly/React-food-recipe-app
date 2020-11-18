@@ -9,7 +9,7 @@ function App() {
   // const exampleReq=
   const [recipe, setRecipes] = useState([]);
   const [search, setSearch] =  useState('');
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("banana");
 
 
 
@@ -21,11 +21,11 @@ function App() {
 
   const getRecipe = async () => {
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    const response = await fetch( proxyurl + `https://api.edamam.com/search?q={query}&app_id=${APP_ID}&app_key=${APP_KEY}`);
+    const response = await fetch( proxyurl + `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`);
     const data = await response.json()
     setRecipes(data.hits);
-    console.log(data.hits)
-  }
+    console.log(data.hits);
+  };
 
 
 
