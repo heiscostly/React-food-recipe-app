@@ -9,6 +9,7 @@ function App() {
   const [recipe, setRecipes] = useState([]);
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState("banana");
+  const [loading, setLoading] = useState(false);
 
 
 
@@ -19,10 +20,12 @@ function App() {
   }, [query]);
 
   const getRecipe = async () => {
+    setLoading(true);
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const response = await fetch(proxyurl + `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`);
     const data = await response.json()
     setRecipes(data.hits);
+    setLoading(false);
     console.log(data.hits);
   };
 
@@ -50,12 +53,19 @@ function App() {
         <button className="search-button" type="submit">Search</button>
       </form>
 
-
-      <div className="recip">
-        {recipe.map(recipe => (
-          <Recipe key={recipe.recipe.label} tittle={recipe.recipe.label} calories={recipe.recipe.calories} image={recipe.recipe.image} ingredients={recipe.recipe.ingredients} />
-        ))}
-      </div>
+      {
+        loading ? (
+          <div>
+            Loading...
+          </div>
+        ) : (
+            <div className="recip">
+              {recipe.map(recipe => (
+                <Recipe key={recipe.recipe.label} tittle={recipe.recipe.label} calories={recipe.recipe.calories} image={recipe.recipe.image} ingredients={recipe.recipe.ingredients} />
+              ))}
+            </div>
+          )
+      }
     </div>
   );
 }
